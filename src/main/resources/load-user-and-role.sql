@@ -18,5 +18,9 @@ VALUES ('david', 'David', 'Clerk', 'abcd1234');
 INSERT IGNORE INTO Staff (staffId, firstName, lastName, password)
 VALUES ('bryan', 'Bryan', 'Broker', 'abcd1234');
 
-INSERT INTO Customer (firstName, lastName, pin, income, email)
+-- Ensure email is unique in Customer table
+ALTER TABLE Customer ADD CONSTRAINT unique_email UNIQUE (email);
+
+-- Insert customer only if not exists (avoids duplicates)
+INSERT IGNORE INTO Customer (firstName, lastName, pin, income, email)
 VALUES ('Alice', 'Power', 'abcd1234', '80000', 'power@abc.com');

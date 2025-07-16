@@ -17,6 +17,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -111,11 +112,15 @@ public class PersistenceConfiguration {
 
     @Bean
     DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
-        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
-        resourceDatabasePopulator.addScript(new ClassPathResource("load-user-and-role.sql"));
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Customer", Integer.class);
         DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(dataSource);
-        initializer.setDatabasePopulator(resourceDatabasePopulator);
+        if (count != null && count == 0) {
+            ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
+            resourceDatabasePopulator.addScript(new ClassPathResource("load-user-and-role.sql"));
+            initializer.setDatabasePopulator(resourceDatabasePopulator);
+        }
         return initializer;
     }
 

@@ -4,6 +4,7 @@ import com.westbank.proxy.LoanApprovalProcessProxy;
 import com.westbank.web.Constants;
 import com.westbank.web.form.ApplicationForm;
 import com.westbank.web.validator.LoanRequestValidator;
+import com.westbank.web.validator.SessionValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,6 +114,10 @@ public class LoanRequestController {
                 session.setAttribute(Constants.SESSION_CUSTOMER_EMAIL, applicationForm
                         .getBorrowerEmail());
                 if (processProxy != null) {
+                    final Object sessionId = SessionValidator.validateSession(session, Constants.SESSION_CUSTOMER_ID);
+                    if (sessionId != null) {
+                        applicationForm.setBorrowerCustomerId((Long) sessionId);
+                    }
                     log.info("Send loan request to the process via the proxy");
                     boolean isOK = processProxy.startProcess(applicationForm);
                     if (isOK) {
