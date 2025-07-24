@@ -4,7 +4,39 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9d5d1f8-0b7a-4d7a-8e51-f59a7880ce51" name="Default" comment="" />
+    <list default="true" id="b9d5d1f8-0b7a-4d7a-8e51-f59a7880ce51" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/loan-approval-portal.iws" beforeDir="false" afterPath="$PROJECT_DIR$/loan-approval-portal.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/config/ServiceClientBeans.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/config/ServiceClientBeans.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/web/controller/LoanRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/web/controller/LoanRequestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/web/controller/NewRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/web/controller/NewRequestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankinformation/_2018/_06/BankInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankinformation/_2018/_06/BankInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankinformation/_2018/_06/BankInformation_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankinformation/_2018/_06/BankInformation_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankprivilege/_2018/_06/BankPrivilege.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankprivilege/_2018/_06/BankPrivilege.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankprivilege/_2018/_06/BankPrivilege_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/bankprivilege/_2018/_06/BankPrivilege_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/creditworthiness/_2018/_06/CreditWorthiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/creditworthiness/_2018/_06/CreditWorthiness.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/creditworthiness/_2018/_06/CreditWorthiness_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/creditworthiness/_2018/_06/CreditWorthiness_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanapprovalclosing/_2018/_06/LoanApprovalClosing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanapprovalclosing/_2018/_06/LoanApprovalClosing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanapprovalclosing/_2018/_06/LoanApprovalClosing_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanapprovalclosing/_2018/_06/LoanApprovalClosing_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loancontract/_2018/_06/LoanContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loancontract/_2018/_06/LoanContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loancontract/_2018/_06/LoanContract_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loancontract/_2018/_06/LoanContract_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanfile/_2018/_06/LoanFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanfile/_2018/_06/LoanFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanfile/_2018/_06/LoanFile_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanfile/_2018/_06/LoanFile_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanrisk/_2018/_06/LoanRisk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanrisk/_2018/_06/LoanRisk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanrisk/_2018/_06/LoanRisk_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loanrisk/_2018/_06/LoanRisk_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loansettlement/_2018/_06/LoanSettlement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loansettlement/_2018/_06/LoanSettlement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loansettlement/_2018/_06/LoanSettlement_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/loansettlement/_2018/_06/LoanSettlement_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/taskdispatch/_2018/_06/TaskDispatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/taskdispatch/_2018/_06/TaskDispatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/taskdispatch/_2018/_06/TaskDispatch_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/business/taskdispatch/_2018/_06/TaskDispatch_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloanapproval/CallbackLoanApproval.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloanapproval/CallbackLoanApproval.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloanapproval/CallbackLoanApproval_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloanapproval/CallbackLoanApproval_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloancontract/CallbackLoanContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloancontract/CallbackLoanContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloancontract/CallbackLoanContract_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/client/callbackloancontract/CallbackLoanContract_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/process/loanapproval/_2018/_06/LoanApproval.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/process/loanapproval/_2018/_06/LoanApproval.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/westbank/ws/process/loanapproval/_2018/_06/LoanApproval_Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/westbank/ws/process/loanapproval/_2018/_06/LoanApproval_Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/endpoint.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/endpoint.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/customer/newrequest.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/customer/newrequest.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/wsdl/LoanApproval.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/wsdl/LoanApproval.wsdl" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -469,29 +501,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.Whole project.executor": "Run",
-    "Maven.loan-approval-portal [clean].executor": "Run",
-    "Maven.loan-approval-portal [install].executor": "Run",
-    "Maven.loan-approval-portal [org.eclipse.jetty:jetty-maven-plugin:9.4.17.v20190418:run].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "anurag",
-    "last_opened_file_path": "D:/loan Approval project/loan-approval-portal/loan-approval-portal",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.Whole project.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.loan-approval-portal [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.loan-approval-portal [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.loan-approval-portal [org.eclipse.jetty:jetty-maven-plugin:9.4.17.v20190418:run].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dilip&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/loanApproval/loanApplicationApproval_jdk1.5&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.westbank.config" />
@@ -601,14 +633,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
-        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpringBeansView">
     <option name="beanDetailsProportion" value="0.3" />

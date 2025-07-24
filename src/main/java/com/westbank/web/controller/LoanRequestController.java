@@ -1,9 +1,14 @@
 package com.westbank.web.controller;
 
+import com.westbank.domain.Customer;
 import com.westbank.proxy.LoanApprovalProcessProxy;
 import com.westbank.web.Constants;
 import com.westbank.web.form.ApplicationForm;
+
+
+
 import com.westbank.web.validator.LoanRequestValidator;
+import com.westbank.web.validator.SessionValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.westbank.service.CustomerService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,6 +47,7 @@ public class LoanRequestController {
     private ApplicationForm applicationForm;
     private LoanRequestValidator validator;
     private LoanApprovalProcessProxy processProxy;
+    private CustomerService customerService;
 
     @Autowired
     public void setValidator(LoanRequestValidator validator) {
@@ -57,6 +64,11 @@ public class LoanRequestController {
         this.applicationForm = applicationForm;
         if (this.applicationForm == null)
             this.applicationForm = new ApplicationForm();
+    }
+
+    @Autowired
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @ModelAttribute("applicationForm")
@@ -116,6 +128,24 @@ public class LoanRequestController {
                     log.info("Send loan request to the process via the proxy");
                     boolean isOK = processProxy.startProcess(applicationForm);
                     if (isOK) {
+                        // Set session attributes for info page
+                        String title = applicationForm.getBorrowerTitle();
+                        String firstName = applicationForm.getBorrowerFirstName();
+                        String lastName = applicationForm.getBorrowerLastName();
+                        String email = applicationForm.getBorrowerEmail();
+                        final Object sessionId = SessionValidator.validateSession(session, Constants.SESSION_CUSTOMER_ID);
+                        if ((firstName == null || lastName == null || email == null) && sessionId != null) {
+                            Customer borrower = customerService.findCustomerById((Long) sessionId);
+                            if (borrower != null) {
+                                if (title == null) title = borrower.getTitle();
+                                if (firstName == null) firstName = borrower.getFirstName();
+                                if (lastName == null) lastName = borrower.getLastName();
+                                if (email == null) email = borrower.getEmail();
+                            }
+                        }
+                        session.setAttribute(Constants.SESSION_CUSTOMER_TITLE, title);
+                        session.setAttribute(Constants.SESSION_CUSTOMER_NAME, (firstName != null ? firstName : "") + " " + (lastName != null ? lastName : ""));
+                        session.setAttribute(Constants.SESSION_CUSTOMER_EMAIL, email);
                         return REQUEST_INFO;
                     } else {
                         session.setAttribute(Constants.SESSION_PROCESS_STATUS,

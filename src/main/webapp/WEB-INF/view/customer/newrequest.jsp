@@ -199,7 +199,7 @@
                 showMonthAfterYear: false,
                 changeMonth: true,
                 changeYear: true,
-                dateFormat: 'yyyy-mm-dd',
+                dateFormat: 'yy-mm-dd', // Fixed: jQuery UI expects 'yy' not 'yyyy'
                 buttonImage: '/portal/images/calendar.gif',
                 buttonImageOnly: true,
                 showOn: 'both'

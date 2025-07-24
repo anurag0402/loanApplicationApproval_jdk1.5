@@ -43,7 +43,7 @@ public class ServiceClientBeans {
 
     @Bean
     LoanApproval loanApprovalClient() {
-        String endpoint = env.getProperty("process.start.endpoint");
+        String endpoint = env.getProperty("process.start.endpoint.portal"); // Use portal endpoint instead of ODE
         return new ServiceFactory<LoanApproval>().create(LoanApproval.class, endpoint);
     }
 

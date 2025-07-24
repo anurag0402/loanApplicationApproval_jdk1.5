@@ -225,7 +225,7 @@
 
   <ws:service name="LoanApproval">
     <ws:port name="LoanApprovalPort" binding="tns:LoanApprovalSOAP">
-      <soap:address location="http://localhost:8080/ode/processes/LoanApproval" />
+      <soap:address location="REPLACE_WITH_ACTUAL_ENDPOINT" />
     </ws:port>
   </ws:service>
      

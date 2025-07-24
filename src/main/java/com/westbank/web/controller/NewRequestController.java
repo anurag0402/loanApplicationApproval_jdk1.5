@@ -25,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.westbank.helper.DateHelper;
 
 /**
  * A controller for handling a new loan request issued after the customer already
@@ -43,6 +44,8 @@ public class NewRequestController {
     private NewRequestValidator validator;
     private LoanApprovalProcessProxy processProxy;
     private CustomerService customerService;
+    @Autowired
+    private com.westbank.service.LoanFileService loanFileService;
 
     @Autowired
     public void setValidator(NewRequestValidator validator) {
@@ -111,23 +114,59 @@ public class NewRequestController {
             } else {
                 if (sessionId != null) {
                     session.setAttribute(Constants.SESSION_NAV, Constants.NAV_NEW_REQUEST);
-                    if (processProxy != null) {
-                        log.info("Deliver the new request to the process");
-                        // customer ID must be set to be properly handled
-                        applicationForm.setBorrowerCustomerId((Long)sessionId);
-                        Customer borrower = customerService.findCustomerById((Long) sessionId);
-                        boolean isOK = processProxy.startProcess(applicationForm);
-                        if (isOK) {
-                            session.setAttribute(Constants.SESSION_CUSTOMER_TITLE, borrower.getTitle());
-                            session.setAttribute(Constants.SESSION_CUSTOMER_NAME,
-                                    borrower.getFirstName() + " " + borrower.getLastName());
-                            session.setAttribute(Constants.SESSION_CUSTOMER_EMAIL, borrower.getEmail());
-                            return NEW_REQUEST_INFO;
-
-                        } else {
-                            session.setAttribute(Constants.SESSION_PROCESS_STATUS, Constants.PROCESS_STATUS_ERROR);
-                            session.setAttribute(Constants.SESSION_PROCESS_STATUS_KEY, Constants.MSG_INVOCATION_ERR);
+                    // Save to loanfile table
+                    com.westbank.ws.business.loanfile._2018._06.LoanFileRequest loanFileRequest = new com.westbank.ws.business.loanfile._2018._06.LoanFileRequest();
+                    // Map fields from applicationForm to loanFileRequest
+                    loanFileRequest.setBorrowerCustomerId((Long) sessionId);
+                    loanFileRequest.setLoanReason(applicationForm.getLoanReason());
+                    loanFileRequest.setResidenceType(applicationForm.getResidenceType() != null ? applicationForm.getResidenceType().name() : null);
+                    loanFileRequest.setEstateType(applicationForm.getEstateType() != null ? applicationForm.getEstateType().name() : null);
+                    loanFileRequest.setEstateLocation(applicationForm.getEstateAddress());
+                    loanFileRequest.setTotalPurchasePrice(applicationForm.getTotalPurchasePrice());
+                    loanFileRequest.setPersonalCapitalContribution(applicationForm.getPersonalCapitalContribution());
+                    loanFileRequest.setLoanAmount(applicationForm.getLoanAmount());
+                    loanFileRequest.setLoanTerm(applicationForm.getLoanTerm());
+                    loanFileRequest.setInterestRate(applicationForm.getInterestRate());
+                    loanFileRequest.setSettlementDate(DateHelper.convert(applicationForm.getStartDate()));
+                    loanFileRequest.setAccessSensitiveData(applicationForm.isAccessSensitiveData());
+                    loanFileRequest.setCoBorrower(applicationForm.isHasCoborrower());
+                    if (applicationForm.isHasCoborrower()) {
+                        loanFileRequest.setCoBorrowerCustomerId(applicationForm.getCoborrowerCustomerId());
+                        loanFileRequest.setCoBorrowerTitle(applicationForm.getCoborrowerTitle());
+                        loanFileRequest.setCoBorrowerFirstName(applicationForm.getCoborrowerFirstName());
+                        loanFileRequest.setCoBorrowerLastName(applicationForm.getCoborrowerLastName());
+                        loanFileRequest.setCoBorrowerDateOfBirth(DateHelper.convert(applicationForm.getCoborrowerDateOfBirth()));
+                        loanFileRequest.setCoBorrowerOccupation(applicationForm.getCoborrowerOccupation());
+                        loanFileRequest.setCoBorrowerLengthOfService(applicationForm.getCoborrowerLengthOfService());
+                        loanFileRequest.setCoBorrowerIncome(applicationForm.getCoborrowerIncome());
+                        loanFileRequest.setCoBorrowerEmail(applicationForm.getCoborrowerEmail());
+                    }
+                    // Always set staffId for createdBy to a default value for customer-initiated requests
+                    String staffId = "customer-portal"; // Make sure this staffId exists in your DB
+                    loanFileRequest.setStaffId(staffId);
+                    com.westbank.ws.business.loanfile._2018._06.LoanFileResponse response = loanFileService.saveLoanRequest(loanFileRequest);
+                    if (response != null && response.getLoanFileId() != null) {
+                        // Set session attributes for info page
+                        String title = applicationForm.getBorrowerTitle();
+                        String firstName = applicationForm.getBorrowerFirstName();
+                        String lastName = applicationForm.getBorrowerLastName();
+                        String email = applicationForm.getBorrowerEmail();
+                        if ((firstName == null || lastName == null || email == null) && sessionId != null) {
+                            Customer borrower = customerService.findCustomerById((Long) sessionId);
+                            if (borrower != null) {
+                                if (title == null) title = borrower.getTitle();
+                                if (firstName == null) firstName = borrower.getFirstName();
+                                if (lastName == null) lastName = borrower.getLastName();
+                                if (email == null) email = borrower.getEmail();
+                            }
                         }
+                        session.setAttribute(Constants.SESSION_CUSTOMER_TITLE, title);
+                        session.setAttribute(Constants.SESSION_CUSTOMER_NAME, (firstName != null ? firstName : "") + " " + (lastName != null ? lastName : ""));
+                        session.setAttribute(Constants.SESSION_CUSTOMER_EMAIL, email);
+                        return NEW_REQUEST_INFO;
+                    } else {
+                        session.setAttribute(Constants.SESSION_PROCESS_STATUS, Constants.PROCESS_STATUS_ERROR);
+                        session.setAttribute(Constants.SESSION_PROCESS_STATUS_KEY, Constants.MSG_INVOCATION_ERR);
                     }
                 } else {
                     log.info("Session ID is invalid. Customer must log-in first");
