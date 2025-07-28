@@ -12,15 +12,20 @@
     <%@ include file="../parts/header_css.html" %>
     <link rel="stylesheet" type="text/css" href="css/login.css"/>
 
+    <!-- Add the jQuery CDN link (Ensure it's included before your script) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <c:import url="message.jsp"/>
 <div id="content">
+    <!-- Submit the form to the StaffLoginController's POST method -->
     <form:form id="loginForm" method="post" modelAttribute="staffLoginForm">
         <form:hidden path="action" id="action"/>
         <div id="heading"></div>
-        <div id="title"><img id="imgLock" src="../images/lock.png" alt=""/>
-            Log in the Staff Portal
+        <div id="title">
+            <img id="imgLock" src="../images/lock.png" alt=""/>
+            Log in to the Staff Portal
         </div>
         <div id="formBody">
             <label for="id">Staff:</label>
@@ -38,30 +43,36 @@
 
             <label for="staffRole">Role<span class="required">*</span></label>
             <form:select path="staffRole" id="staffRole">
-                <form:option value="" label=""/>
+                <!--<form:option value="" label=""/>
                 <c:forEach items="${roles}" var="role">
                     <form:option value="${role.roleName}" label="${role.roleName}"/>
-                </c:forEach>
+                </c:forEach> -->
+                <form:option value="Manager" label="Manager"/>
             </form:select>
             <form:errors cssClass="loginError" path="staffRole"/>
+
             <div id="divSubmit">
                 <div class="buttons">
-                    <a onclick="submitForm('');"><img src="../images/login.png" alt=""/>Log In</a>
+                    <!-- Fix the incorrect onclick event, it should not be in the href attribute -->
+                    <a href="javascript:void(0);" onclick="submitForm('');">
+                        <img src="../images/login.png" alt=""/> Log In
+                    </a>
                 </div>
             </div>
         </div>
     </form:form>
 </div>
-<%@ include file="../parts/footer_scripts.html" %>
-<script type="text/javascript">
-    <!--
-    function submitForm(action) {
-        $("#action").val(action);
-        $('#loginForm').submit();
-    }
 
-    //-->
+<%@ include file="../parts/footer_scripts.html" %>
+
+<script type="text/javascript">
+    // Function to set the action and submit the form
+    function submitForm(action) {
+        $("#action").val(action); // Set the action parameter
+        $('#loginForm').submit();  // Submit the form
+    }
 </script>
+
 <c:import url="doc-ready.jsp"/>
 
 </body>

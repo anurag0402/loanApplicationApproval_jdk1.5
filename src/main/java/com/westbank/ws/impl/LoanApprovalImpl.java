@@ -167,9 +167,9 @@ public class LoanApprovalImpl implements LoanApproval {
     public void informedByCustomer(CustomerDecision request) {
         log.info("Received the customer's signature:" + request);
         Long contractId = request.getContractId();
-        Optional<Contract> contract = loanContractDao.findContractById(contractId);
-        if (contract.isPresent()) {
-            Long loanFileId = contract.get().getLoanFile().getLoanFileId();
+        Contract contract = loanContractDao.findContractById(contractId);
+        if (contract != null) {
+            Long loanFileId = contract.getLoanFile().getLoanFileId();
             performLoanSettlement(contractId);
             closeLoanApproval(loanFileId, contractId);
             notifyCustomer(loanFileId, contractId);

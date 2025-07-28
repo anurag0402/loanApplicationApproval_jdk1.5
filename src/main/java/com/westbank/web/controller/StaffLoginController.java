@@ -42,7 +42,6 @@ public class StaffLoginController {
     @Autowired
     protected StaffService staffService;
 
-
     @ModelAttribute("staffLoginForm")
     public StaffLoginForm setupStaffLoginForm() {
         if (staffLoginForm != null) {
@@ -53,27 +52,29 @@ public class StaffLoginController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String prepare(@ModelAttribute StaffLoginForm form,
-                          HttpSession session) {
+    public String prepare(@ModelAttribute StaffLoginForm form, HttpSession session) {
         session.removeAttribute(Constants.SESSION_PROCESS_STATUS);
         session.removeAttribute(Constants.SESSION_PROCESS_STATUS_KEY);
         session.removeAttribute(Constants.SESSION_STAFF_ID);
+
         if (form != null) {
             final String staffId = form.getId();
-            if (staffId != null && !staffId.isEmpty()) {
+            if (staffId != null && staffId.length() > 0) {
+                // Fetch staff and roles from the service
                 final Staff staff = staffService.getStaffById(staffId);
                 if (staff != null) {
+                    // Ensure roles are loaded before setting them in the session
                     session.setAttribute("roles", staff.getRole());
                 }
             }
             session.setAttribute("staffs", staffService.findAll());
         }
+
         return THIS_VIEW;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String processSubmission(@ModelAttribute StaffLoginForm form, BindingResult result, HttpSession session) {
-
         if (ACTION_CHANGED.equalsIgnoreCase(form.getAction())) {
             final String staffId = form.getId();
             log.info("Change staff to: " + staffId);
@@ -93,11 +94,9 @@ public class StaffLoginController {
                     final String inputRole = form.getStaffRole();
                     final Staff staff = staffService.authenticateStaff(form.getId(), form.getPassword());
                     boolean isLogged = false;
-                    if (staff != null && inputRole != null
-                            && !inputRole.isEmpty()) {
+                    if (staff != null && inputRole != null && inputRole.length() > 0) {
                         for (final Role role : staff.getRole()) {
-                            if (inputRole.equalsIgnoreCase(role
-                                    .getRoleName())) {
+                            if (inputRole.equalsIgnoreCase(role.getRoleName())) {
                                 isLogged = true;
                                 break;
                             }
@@ -105,30 +104,20 @@ public class StaffLoginController {
                     }
                     if (!isLogged) {
                         log.info("Failed authentication. Stay!");
-                        session.setAttribute(
-                                Constants.SESSION_PROCESS_STATUS,
-                                Constants.PROCESS_STATUS_ERROR);
-                        session.setAttribute(
-                                Constants.SESSION_PROCESS_STATUS_KEY,
-                                Constants.MSG_STAFF_LOGIN_FAILED);
+                        session.setAttribute(Constants.SESSION_PROCESS_STATUS, Constants.PROCESS_STATUS_ERROR);
+                        session.setAttribute(Constants.SESSION_PROCESS_STATUS_KEY, Constants.MSG_STAFF_LOGIN_FAILED);
                     } else {
                         log.info("Successful authentication. Forwarded");
-                        session.setAttribute(Constants.SESSION_STAFF_ID,
-                                staff.getStaffId());
-                        session.setAttribute(Constants.SESSION_STAFF_ROLE,
-                                inputRole);
+                        session.setAttribute(Constants.SESSION_STAFF_ID, staff.getStaffId());
+                        session.setAttribute(Constants.SESSION_STAFF_ROLE, inputRole);
                         if (Role.CREDIT_BROKER.equalsIgnoreCase(inputRole)) {
                             return BROKER_VIEW;
-                        } else if (Role.POST_PROCESSING_CLERK
-                                .equalsIgnoreCase(inputRole)
-                                || Role.SUPERVISOR
-                                .equalsIgnoreCase(inputRole)) {
+                        } else if (Role.POST_PROCESSING_CLERK.equalsIgnoreCase(inputRole) || Role.SUPERVISOR.equalsIgnoreCase(inputRole)) {
                             return SUPERVISOR_CLERK_VIEW;
                         } else if (Role.MANAGER.equalsIgnoreCase(inputRole)) {
                             return MANAGER_VIEW;
                         } else {
-                            log.error("Role '" + inputRole
-                                    + "' has not been supported yet.");
+                            log.error("Role '" + inputRole + "' has not been supported yet.");
                         }
                     }
                 }
@@ -136,6 +125,7 @@ public class StaffLoginController {
                 log.error("Cannot get the autowired staff login validator");
             }
         }
+
         return THIS_VIEW;
     }
 }

@@ -29,7 +29,7 @@ public class LoanContractServiceImpl implements LoanContractService {
         return loanContractDao.findAll();
     }
 
-    public Optional<Contract> getContractById(Long contractId) {
+    public Contract getContractById(Long contractId) {
         return loanContractDao.findContractById(contractId);
     }
 

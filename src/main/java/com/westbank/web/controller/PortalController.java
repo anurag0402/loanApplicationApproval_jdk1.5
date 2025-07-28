@@ -123,7 +123,7 @@ public class PortalController {
                     Customer customer = customerService.findCustomerById((Long)customerId);
                     final Long loanFileId = form.getLoanFileId();
                     final Long contractId = form.getContractId();
-                    Optional<Contract> contract = loanContractService.getContractById(contractId);
+                    Contract contract = loanContractService.getContractById(contractId);
                     if (customer != null && processProxy != null) {
                         log.info("Send customer's decision to the process");
                         boolean isOK = processProxy.informCustomerDecision(customer.getCustomerId(),
@@ -135,14 +135,14 @@ public class PortalController {
                         } else {
                             // update contract status if the customer accepted, ...
                             if (isAccepted) {
-                                if (contract.isPresent()) {
+                                if (contract != null) {
                                     log.info("Update the contract's status");
-                                    contract.get().setSignedByCustomer(actionTime);
-                                    LoanFile loanFile = contract.get().getLoanFile();
+                                    contract.setSignedByCustomer(actionTime);
+                                    LoanFile loanFile = contract.getLoanFile();
                                     if (loanFile != null) {
                                         loanFile.setStatus(LoanFileStatus.ACCEPTED);
                                     }
-                                    loanContractService.save(contract.get());
+                                    loanContractService.save(contract);
                                     loanFileService.save(loanFile);
                                 }
                             } else {

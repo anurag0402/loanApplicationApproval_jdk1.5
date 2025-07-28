@@ -66,11 +66,12 @@ public class LoanContractDaoImpl implements LoanContractDao {
     }
 
     public void deleteContract(Contract contract) {
-        Optional<Contract> optional = this.findContractById(contract.getContractId());
-        if (optional.isPresent()) {
-            entityManager.remove(optional.get());
+        Contract existingContract = this.findContractById(contract.getContractId());
+        if (existingContract != null) {
+            entityManager.remove(existingContract);
         }
     }
+
 
     public void deleteLoanContractById(Long contractId) {
         final Contract loanFile = new Contract();
@@ -108,9 +109,10 @@ public class LoanContractDaoImpl implements LoanContractDao {
         return results;
     }
 
-    public Optional<Contract> findContractById(Long contractId) {
-        return Optional.ofNullable(entityManager.find(Contract.class, contractId));
+    public Contract findContractById(Long contractId) {
+        return entityManager.find(Contract.class, contractId);
     }
+
 
     public void save(Contract contract) {
         entityManager.persist(contract);

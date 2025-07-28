@@ -21,7 +21,7 @@ public interface LoanContractDao {
 
     List<Contract> findContractByBorrower(Customer borrower);
 
-    Optional<Contract> findContractById(Long contractId);
+    Contract findContractById(Long contractId);
 
     void save(Contract loan);
 }

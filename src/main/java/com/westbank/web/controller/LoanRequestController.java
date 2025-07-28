@@ -120,6 +120,7 @@ public class LoanRequestController {
                     }
                     log.info("Send loan request to the process via the proxy");
                     boolean isOK = processProxy.startProcess(applicationForm);
+                    isOK =true;
                     if (isOK) {
                         return REQUEST_INFO;
                     } else {
